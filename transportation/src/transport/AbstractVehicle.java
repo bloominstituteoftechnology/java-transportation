@@ -1,4 +1,4 @@
-package com.lambdaschool;
+package transport;
 
 public abstract class AbstractVehicle
 {
