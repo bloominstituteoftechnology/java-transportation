@@ -1,64 +1,69 @@
 package transport;
 
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.*;
 
 public class Main
 {
-        public static void printVehicles(ArrayList<AbstractVehicle> vehicles, CheckVehicle tester)
-    {
-        for (AbstractVehicle v : vehicles)
-        {
-            if (tester.test(v))
-            {
-                System.out.println(v.getName() + " " + v.getFuelLevel());
-            }
-        }
-    }
+	public static ArrayList<AbstractVehicle> filteredList = new ArrayList<AbstractVehicle>();
 
-    public static void main(String[] args)
-    {
-        // Part 1 Interfaces
+	public static void filterVehicles(ArrayList<AbstractVehicle> vehicles, CheckVehicle tester, boolean printit)
+	{
+		filteredList.clear();
 
-        Horse seabiscuit = new Horse("Seabiscuit");
-        Horse affirmed = new Horse("Affirmed");
-        Horse joe = new Horse("Joe");
-
-        seabiscuit.eat(10);
-        affirmed.eat(25);
-        seabiscuit.move();
-        seabiscuit.move();
-        seabiscuit.move();
-        System.out.println("Seabiscuit's fuel level " + seabiscuit.getFuelLevel());
-        System.out.println();
+		for (AbstractVehicle v : vehicles)
+		{
+			if (tester.test(v))
+			{
+				if (printit)
+				{
+				    System.out.println(v.getName() + " " + v.getFuelLevel());
+				}
+				filteredList.add(v);
+			}
+		}
+	}
 
 
-        // Part 2 Abstract Classes
+	public static void main(String[] args)
+	{
+		// ********** Interface **********
 
-        System.out.println("*** From Abstract Class");
-        HorseFromVehicle secretariat = new HorseFromVehicle("Secretariat", 10);
-        secretariat.addFuel(10);
-        System.out.println("Secretariat's fuel level " + secretariat.getFuelLevel());
+		Horse seabiscuit = new Horse("Seabiscuit");
+		Horse affirmed = new Horse("Affirmed");
+		Horse joe = new Horse("Joe");
+
+		seabiscuit.eat(10);
+		affirmed.eat(25);
+		for (int i = 0; i < 3; i++)
+		{
+			seabiscuit.move();
+		}
+		System.out.println("Seabiscuit " + seabiscuit.getFuelLevel());
+
+
+		// ********** Abstract Class **********
+
+		System.out.println("\n*** From Abstract Class ***");
+
+		HorseFromVehicle secretariat = new HorseFromVehicle("Secretariat", 10);
+		secretariat.addFuel(10);
+		System.out.println("Secretariat " + secretariat.getFuelLevel());
+
+		HorseFromVehicle eclipse = new HorseFromVehicle("Eclipse");
+		eclipse.move(10);
+		System.out.println("Eclipse " + eclipse.getFuelLevel());
+
         HorseFromVehicle trigger = new HorseFromVehicle("Trigger", 10);
         HorseFromVehicle seattleSlew = new HorseFromVehicle("Seattle Slew", 10);
         HorseFromVehicle americanPharoah = new HorseFromVehicle("American Pharoah", 10);
-        HorseFromVehicle eclipse = new HorseFromVehicle("Eclipse");
-        eclipse.move(10);
-        System.out.println("Eclipse's fuel leve " + eclipse.getFuelLevel());
-
 
         Auto vw = new Auto(1, "EuroVan", 2000);
         Auto toyota = new Auto(10, "Tundra", 1998);
         Auto honda = new Auto (5, "Accord", 2003);
         vw.move();
         vw.move(5);
-        System.out.println(vw.model + " fuel level " + vw.getFuelLevel());
-
-
-        // Part 3 Combining classes
 
         ArrayList<AbstractVehicle> myList = new ArrayList<AbstractVehicle>();
-        // myList.add((seabiscuit);
         myList.add(secretariat);
         myList.add(trigger);
         myList.add(seattleSlew);
@@ -69,26 +74,29 @@ public class Main
         myList.add(honda);
 
         System.out.println();
-        System.out.println("*** The List ***");
+        System.out.println("\n\n\n*** This List ***");
         System.out.println(myList.toString());
-        System.out.println();
 
-
-        // Part 4 Lambda Expressions
-
-        System.out.println("Vehicles with Negative Fuel");
-        printVehicles(myList, v -> v.getFuelLevel() < 0);
-        System.out.println();
-
-        System.out.println("Horses with Postive Fuel");
-        printVehicles(myList, v -> (v.getFuelLevel() > 0) && (v instanceof HorseFromVehicle));
-        System.out.println();
-
-        System.out.println("*** The List Another Way");
-        myList.forEach((v) -> System.out.println(v));
-        System.out.println();
+        System.out.println("\n*** This List Sorted ***");
         myList.sort((v1, v2) -> v1.getName().compareToIgnoreCase(v2.getName()));
-        System.out.println();
         myList.forEach((v) -> System.out.println(v.getName()));
-    }
+
+        // filter list
+        // getFuelLevel() < 0
+        System.out.println("\n*** This List Negative Fuel ***");
+        filterVehicles(myList, v -> v.getFuelLevel() < 0, true);
+
+        System.out.println("\n*** Horse with postive Fuel Sorted by Name ***");
+        filterVehicles(myList, v -> (v.getFuelLevel() > 0) && (v instanceof HorseFromVehicle), false);
+        filteredList.sort((v1, v2) -> v1.getName().compareToIgnoreCase(v2.getName()));
+        filteredList.forEach((v) -> System.out.println(v));
+	}
 }
+
+
+
+
+
+
+
+
