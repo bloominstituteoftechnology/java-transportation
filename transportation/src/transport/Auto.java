@@ -1,49 +1,90 @@
 package transport;
 
+/**
+ * Class for Autos that inherits from AbstractVehicle.
+ */
 public class Auto extends AbstractVehicle
 {
-	private String model;
-	private int year;
+    /**
+     * The type of auto (String). This will be considered the auto's "name".
+     */
+    private String model;
 
-	public Auto(int fuel, String model, int year)
-	{
-		super(fuel);
-		this.model = model;
-		this.year = year;
-	}
+    /**
+     * The model year (int) of this auto.
+     */
+    private int year;
 
-	public String getPath()
-	{
-		return "Road";
-	}
+    /**
+     * Constructor for this Auto that sets the Auto's initial state.
+     *
+     * @param fuel  fuel (int) level of this Auto. Field Inherited from AbstractVehicle.
+     * @param model "Name" (String) of this auto.
+     * @param year  model year (int) of this auto.
+     */
+    public Auto(int fuel, String model, int year)
+    {
+        // call the constructor from the parent, super, class
+        super(fuel);
+        this.model = model;
+        this.year = year;
+    }
 
-	public String getName()
-	{
-		return model;
-	}
+    /**
+     * Gets the path where this abstract vehicle operates.
+     * Implementation of method from AbstractVehicle.
+     *
+     * @return The path (String) where this abstract vehicle operates.
+     */
+    @Override
+    public String getPath()
+    {
+        return "Road";
+    }
 
-	public void setModel(String model)
-	{
-		this.model = model;
-	}
+    /**
+     * Gets the name, model, of this abstract vehicle.
+     * Implementation of method from AbstractVehicle.
+     *
+     * @return The name, model, of this abstract vehicle.
+     */
+    @Override
+    public String getName()
+    {
+        return model;
+    }
 
-	public void setYear(int year)
-	{
-		this.year = year;
-	}
+    /**
+     * Getter for year. This field is unique to this class so we need a getter for it.
+     *
+     * @return The model year (int) of this Auto
+     */
+    public int getYear()
+    {
+        return year;
+    }
 
-	public int getYear()
-	{
-		return year;
-	}
+    /**
+     * Setter for year. This field is unique to this class so we need a setter for it.
+     *
+     * @param year The new model year (int) of this Auto.
+     */
+    public void setYear(int year)
+    {
+        this.year = year;
+    }
 
-	@Override
+    /**
+     * Prints the current state of the object.
+     *
+     * @return the current state of the object (String).
+     */
+    @Override
     public String toString()
     {
         return "Auto{" +
-                "model='" + model + '\'' +
-                ", year=" + year +
-                ", fuel=" + fuel +
-                '}';
+            "year=" + year +
+            ", fuel=" + fuel +
+            '}';
     }
 }
