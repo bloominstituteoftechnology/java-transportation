@@ -10,13 +10,13 @@ This project is used to introduce in Java
 
 ## Layout
 
-The main class with the main method contains most of the work. The work is meant to highlight what can be done with interface, abstract classes and lambda expressions.
+The main class with the main method contains most of the work. The work is meant to highlight what can be done with interfaces, abstract classes and lambda expressions.
 
 ![Diagram of transport](transport-dg.png)
 
 ## Results
 
-The final outcome of this application is:
+The output of this application is:
 
 ```TEXT
 *** Working with Interfaces ***
@@ -56,4 +56,4 @@ HorseFromVehicle{name='Secretariat', fuel=30}
 HorseFromVehicle{name='Trigger', fuel=20}
 ```
 
-Do note that while an Egyptian pharaoh is spelled with a aoh, the horse American Pharoah is spelled with a oah.
+Do note that while an Egyptian pharaoh is spelled with a *aoh*, the horse American Pharoah is spelled with a *oah*.
